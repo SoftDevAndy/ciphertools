@@ -34,6 +34,30 @@ System.out.println(cipherText);
 THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG    
 ````
 
+# Vigenere Friedman Analysis - Friedman.java
+
+Read more about it [here](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher#Friedman_test)
+
+In short its a method of roughly guessing the key length of the cipher text, thus making it easier to crack.
+
+**Analysis**
+````Java
+String knownKey = "KEY";
+VigenereEncrypter vigenereEncrypter = new VigenereEncrypter();						
+String cipherText = vigenereEncrypter.encryptText(knownKey, "FROMVIGENERECIPHERANALYSISITISGENERALLYGOODTOHAVEALARGEMESSAGETOANALYZE");	
+
+Friedman fried = new Friedman();
+float ic = fried.getIndexOfCoincidence(cipherText);
+float keySize = fried.getKeysizeUsingFriedman(ic, cipherText);
+		
+System.out.println("ic: " + ic + " \nkeySize: " + keySize);
+````
+**Output**
+````
+ic: 0.047082495 
+keySize: 2.8923855
+````	
+
 # Rot13 Cipher - RotCipher.java
 
 [Rot13 Cipher Explained](https://en.wikipedia.org/wiki/ROT13) a very simple cipher.
