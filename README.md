@@ -58,6 +58,54 @@ ic: 0.047082495
 keySize: 2.8923855
 ````	
 
+# Vigenere Kasiski Analysis - Friedman.java
+
+Read more about it [here](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher#Kasiski_examination)
+
+Another method of determining key length which furthermore can be used to determine what the key is later on using factors etc
+
+**Usage**
+
+````Java
+String knownKey = "KEY";
+		VigenereEncrypter vigenereEncrypter = new VigenereEncrypter();						
+		String cipherText = vigenereEncrypter.encryptText(knownKey, "FROMVIGENERECIPHERANALYSISITISGENERALLYGOODTOHAVEALARGEMESSAGETOANALYZE");		
+
+System.out.println(cipherText + "\n");
+
+Kasiski ki = new Kasiski();
+List<LinkedHashMap<String,ArrayList<Integer>>> klf = ki.getKeyDifferences(cipherText,2,5);
+
+for(LinkedHashMap<String,ArrayList<Integer>> lhm : klf){
+
+	for(String pattern : lhm.keySet()){
+
+		if(lhm.get(pattern).size() > 1)
+		{
+			System.out.println(pattern + " " + lhm.get(pattern) + "\n");
+
+			for(int x : lhm.get(pattern)){
+
+				System.out.println("[" + x + "] Factors: " + ki.getFactorsOfNumber(x));
+			}	
+
+			System.out.println();
+		}
+	}
+}
+````
+
+**Output**
+````
+PVMWZGQILOVCMMNRIPKRYVCQSWGDMQQILOVYVPWQSMNXMRETOEJKVEOQCCWYQIRYELKPWJI
+
+QI [24, 30]
+
+[24] Factors: [3, 6, 12, 24]
+[30] Factors: [5, 15, 30]  
+````
+
+
 # Rot13 Cipher - RotCipher.java
 
 [Rot13 Cipher Explained](https://en.wikipedia.org/wiki/ROT13) a very simple cipher.
