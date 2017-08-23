@@ -1,4 +1,4 @@
-# java_vigenere
+# Java Vigenere Cipher
 
 Inspired by cryptology and in particial the vigenere cipher I created a bunch of simple tools for encrypting and decrypting these common ciphers. Some of the implementation is pretty simple and I will give example files on how to use them.
 
@@ -32,4 +32,29 @@ System.out.println(cipherText);
 **Output**
 ````
 THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG    
+````
+
+# Rot13 Cipher - RotCipher.java
+
+[Rot13 Cipher Explained](https://en.wikipedia.org/wiki/ROT13) a very simple cipher.
+
+**Encrypting & Decrypting**
+
+````Java
+RotCipher rot13 = new RotCipher();
+String plainText = "Why did the chicken cross the road?";
+
+String encrypted = rot13.encrypt(plainText);
+System.out.println(encrypted);
+
+// Reverse the encryption by simply passing it back through the encryption method again
+
+encrypted = rot13.encrypt(encrypted);
+System.out.println(encrypted);
+
+````
+**Output**
+````
+Jul qvq gur puvpxra pebff gur ebnq?
+Why did the chicken cross the road?   
 ````
