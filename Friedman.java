@@ -1,63 +1,34 @@
-import java.util.ArrayList;
+package vig.enere.breaker;
+
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public class Friedman {
 
-	private List<Float> estimateTable;
 	private LinkedHashMap<Character, Integer> alphabetFrequencyTable;
 	private final int ALPHA = 26;
 	private final int ASCII = 65;
-	private float MIN = 0.0385f;
+	private float MIN = 0.038f;
 	private float MAX = 0.065f;
-		
-	public Friedman(){
-		estimateTable = new ArrayList<Float>();
-		estimateTable.add(0.0407f);
-		estimateTable.add(0.0410f);
-		estimateTable.add(0.0414f);
-		estimateTable.add(0.0419f);
-		estimateTable.add(0.0426f);
-		estimateTable.add(0.0435f);
-		estimateTable.add(0.0449f);
-		estimateTable.add(0.0473f);
-		estimateTable.add(0.0520f);		
-		estimateTable.add(0.0660f);		
-	}
 	
-	public float getPolyAlphabeticValue(String cipherText){
+	public float getIndexOfCoincidence(String cipherText){
 		
 		alphabetFrequencyTable = buildAlphabetFrequencyTable(cipherText);
 		
 		float nTotal = valueCount(alphabetFrequencyTable);
 		float otherTotal = otherValueCount(alphabetFrequencyTable);		
-		float result = otherTotal / (nTotal * nTotal - 1);		
 		
-		return result;
+		return otherTotal / (nTotal * (nTotal - 1));	
 	}
 	
-	public int getKeysizeEstimateUsingFriedman(float polyAlphabeticValue, String cipherText){
+	public float getKeysizeUsingFriedman(float indexOfCoincidence, String cipherText){
 		
 		alphabetFrequencyTable = buildAlphabetFrequencyTable(cipherText);
 		
 		float nTotal = valueCount(alphabetFrequencyTable);		
-		float a = (0.027f * nTotal);
-		float b = (nTotal - 1) * polyAlphabeticValue + MAX - (MIN * nTotal);
+		float a = 0.027f * nTotal;
+		float b = (nTotal - 1) * indexOfCoincidence - MIN * nTotal + MAX;
 				
-		return (int)(a / b);
-	}
-	
-	public int getKeysizeEstimateUsingTable(float polyAlphabeticValue){
-		
-		int pos = 0;
-		
-		for(int i = 0; i < estimateTable.size(); i++){
-			
-			if(polyAlphabeticValue > estimateTable.get(i))				
-				pos = i;
-		}
-		
-		return (pos + 1);
+		return a / b;
 	}
 	
 	private LinkedHashMap<Character, Integer> buildAlphabetFrequencyTable(String cipherText){
@@ -98,7 +69,10 @@ public class Friedman {
 		int total = 0;
 		
 		for(int x : frequencyTable.values()){
-			total += (x * (x - 1));
+			
+			if(x != 0){
+				total += (x * (x - 1));
+			}
 		}
 		
 		return total;
