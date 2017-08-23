@@ -103,7 +103,9 @@ QI [24, 30]
 
 [24] Factors: [3, 6, 12, 24]
 [30] Factors: [5, 15, 30]  
+
 ````
+From examing the factors above, we can assume the factor of 3 is the most common and possibly the key length. (The key word was in fact "KEY").
 
 
 # Rot13 Cipher - RotCipher.java
