@@ -50,4 +50,20 @@ GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT
 C:\>java -jar cipher.jar -CAESAR 13 "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT"
 
 THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+
+C:\>java -jar cipher.jar -IOC "RFGQGQKWNFPYQCRFYRUGJJECRCLAMBCB"
+
+Index of coincidence: 0.048387095
+
+Close to 0.070         = Possible Monoalphabetic or Subsitution Cipher.
+Close to 0.045 to 0.05 = Possible Vigenere Cipher.
+Close to 0.0385        = Possible Polyalphabetic Cipher.
+
+C:\>java -jar cipher.jar -ENCODEBASE64 "The quick brown fox jumps over the lazy dog."
+
+VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4=
+
+C:\>java -jar cipher.jar -DECODEBASE64 "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4="
+
+The quick brown fox jumps over the lazy dog.
 ```
