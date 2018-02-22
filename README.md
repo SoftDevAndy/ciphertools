@@ -66,4 +66,9 @@ VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4=
 C:\>java -jar cipher.jar -DECODEBASE64 "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4="
 
 The quick brown fox jumps over the lazy dog.
+
+C:\>java -jar cipher.jar -FRIEDKEY "RFGQGQKWNFPYQCRFYRUGJJECRCLAMBCB"
+
+Friedman IOC:     0.048387095
+Friedman Keysize: 2.4756446
 ```
