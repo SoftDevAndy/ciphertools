@@ -1,3 +1,4 @@
+package vig.enere.breaker;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,6 @@ public class VigenereEncrypter {
 	private final int MAXASCII = 90;
 	
 	private List<String> vigenereSquare;
-	
-	public VigenereEncrypter(){}	
 	
 	public String decryptText(String keyword, String cipherText){
 		
@@ -48,17 +47,21 @@ public class VigenereEncrypter {
 		
 		int i = 0;
 		
-		for(Character a : cipherText.toCharArray()){
+		for(Character a : cipherText.toUpperCase().toCharArray()){
 			
-			Character b = codexStr.charAt(i);
-			int x = (int)(b - MINASCII);
-			int y = (int)(a - MINASCII);
+			if(Character.isLetter(a)){
 			
-			Character encodedChar = getVigenereSquareChar(x,y);
+				Character b = codexStr.charAt(i);
+				int x = (int)(b - MINASCII);
+				int y = (int)(a - MINASCII);
+				
+				Character encodedChar = getVigenereSquareChar(x,y);
+				
+				encodedText.append(encodedChar);
+				
+				i++;
+			}
 			
-			encodedText.append(encodedChar);
-			
-			i++;
 		}
 		
 		return encodedText.toString();
@@ -72,7 +75,7 @@ public class VigenereEncrypter {
 		return vigenereSquare.get(x).charAt(y);
 	}
 	
-	private StringBuffer buildCodexString(String keyword, String cipherText){
+	private StringBuffer buildCodexString(String keyword, String cipherIn){
 		
 		/* Creates the codex string for the vigenere square e.g
 		 * 
@@ -82,6 +85,24 @@ public class VigenereEncrypter {
 		 */
 		
 		StringBuffer sb = new StringBuffer();
+		StringBuffer cipherText = new StringBuffer();
+		
+		String cleanKey = "";
+		
+		for(Character c : keyword.toUpperCase().toCharArray()){
+			
+			if(Character.isAlphabetic(c)){
+				cleanKey = c + "";
+			}
+		}
+		
+		keyword = cleanKey;
+		
+		for(Character c : cipherIn.toUpperCase().toCharArray()){
+			
+			if(Character.isLetter(c))
+				cipherText.append(c);
+		}
 		
 		int keyCount = (cipherText.length() / keyword.length());
 		int difference = cipherText.length() - (keyCount * keyword.length());

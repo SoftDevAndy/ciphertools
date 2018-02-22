@@ -11,9 +11,26 @@ import java.util.regex.Pattern;
 
 public class Kasiski {
 	
-	public Kasiski(){}
-				
-	public List<LinkedHashMap<String,ArrayList<Integer>>> getKeyDifferences(String cipherText, int min, int max){
+	public String getFactorsOfNumber(int factorMe){
+        
+		ArrayList<Integer> hs = new ArrayList<Integer>();
+		
+        for(int i = 2; i <= factorMe; i++){
+        	
+        	while(factorMe % i == 0)
+        	{            	
+            	hs.add(factorMe);
+            	
+            	factorMe = factorMe / i;
+            }            
+        }
+        
+        Collections.reverse(hs);
+        
+        return hs.toString();
+	}
+		
+	private List<LinkedHashMap<String,ArrayList<Integer>>> getKeyDifferences(String cipherText, int min, int max){
 		
 		List<LinkedHashMap<String,ArrayList<Integer>>> keyPositions = keyPositions(cipherText, min, max);
 		List<LinkedHashMap<String,ArrayList<Integer>>> klf = new ArrayList<LinkedHashMap<String,ArrayList<Integer>>>();
@@ -47,25 +64,6 @@ public class Kasiski {
 		}
 		
 		return klf;
-	}
-	
-	public ArrayList<Integer> getFactorsOfNumber(int factorMe){
-        
-		ArrayList<Integer> hs = new ArrayList<Integer>();
-		
-        for(int i = 2; i <= factorMe; i++){
-        	
-        	while(factorMe % i == 0)
-        	{            	
-            	hs.add(factorMe);
-            	
-            	factorMe = factorMe / i;
-            }            
-        }
-        
-        Collections.reverse(hs);
-        
-        return hs;
 	}
 	
 	private List<LinkedHashMap<String,ArrayList<Integer>>> keyPositions(String cipherText, int min, int max){
