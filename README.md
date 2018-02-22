@@ -1,134 +1,53 @@
-# Java Vigenere Cipher
+# ciphertools
 
 Inspired by cryptology and in particial the vigenere cipher I created a bunch of simple tools for encrypting and decrypting these common ciphers. Some of the implementation is pretty simple and I will give example files on how to use them.
 
-### Vigenere Cipher - VigenereEncrypter.java
+## Help and Usage
 
-What is it? [Click here to read about it](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher)
-The above link can explain the cipher technique in a far better way then I could. I only implemented it!
+```
+C:\>java -jar cipher.jar -help
 
-**TL;DR** It takes a Vigenere Square and a keyword. If you know the keyword you can also unencrypt it quite easily. This cipher was secure in the past but in recent years statistical analysis such as the **Kasiski** method and the **Friedman** method helped later to guess the keyword length thus making cracking the encrypted text a lot more easier.
+---------- Help & Usage ----------
+-ENCODEBASE64 plaintext
+-DECODEBASE64 ciphertext
+-ENCODEVIGENERE key plaintext
+-DECODEVIGENERE key ciphertext
+-ATBASH cipherorplaintext
+-CAESAR 13 plaintext
+-FRIEDKEY ciphertext
+-IOC ciphertext
+-FACTORS 15
+----------------------------------
 
-Using this the my implementation for this is quite easy.
+C:\>java -jar cipher.jar -encodevigenere key "This is my phrase that will get encoded."
 
-**Encrypting**
-````Java
-String knownKey = "BLUES";
-VigenereEncrypter vigenereEncrypter = new VigenereEncrypter();						
-String cipherText = vigenereEncrypter.encryptText(knownKey, "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG");		
-System.out.println(cipherText);
-````
-**Output**
-````
-USYUMJNEFJPHHJGYUOQHTZPIJUSYPSAJXSY    
-````
-**Decrypting**
-````Java
-String knownKey = "BLUES";
-VigenereEncrypter vigenereEncrypter = new VigenereEncrypter();						
-String cipherText = vigenereEncrypter.decryptText(knownKey, "USYUMJNEFJPHHJGYUOQHTZPIJUSYPSAJXSY");		
-System.out.println(cipherText);
-````
-**Output**
-````
-THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG    
-````
+RFGQGQKWNFPYQCRFYRUGJJECRCLAMBCB
 
-# Vigenere Friedman Analysis - Friedman.java
+C:\>java -jar cipher.jar -decodevigenere key "RFGQGQKWNFPYQCRFYRUGJJECRCLAMBCB"
 
-Read more about it [here](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher#Friedman_test)
+THISISMYPHRASETHATWILLGETENCODED
 
-In short its a method of roughly guessing the key length of the cipher text, thus making it easier to crack.
+C:\>java -jar cipher.jar -ENCODEBASE64 "So this is really something strange."
 
-**Analysis**
-````Java
-String knownKey = "KEY";
-VigenereEncrypter vigenereEncrypter = new VigenereEncrypter();						
-String cipherText = vigenereEncrypter.encryptText(knownKey, "FROMVIGENERECIPHERANALYSISITISGENERALLYGOODTOHAVEALARGEMESSAGETOANALYZE");	
+U28gdGhpcyBpcyByZWFsbHkgc29tZXRoaW5nIHN0cmFuZ2Uu
 
-Friedman fried = new Friedman();
-float ic = fried.getIndexOfCoincidence(cipherText);
-float keySize = fried.getKeysizeUsingFriedman(ic, cipherText);
-		
-System.out.println("ic: " + ic + " \nkeySize: " + keySize);
-````
-**Output**
-````
-ic: 0.047082495 
-keySize: 2.8923855
-````	
+C:\>java -jar cipher.jar -DECODEBASE64 "U28gdGhpcyBpcyByZWFsbHkgc29tZXRoaW5nIHN0cmFuZ2Uu"
 
-# Vigenere Kasiski Analysis - Friedman.java
+So this is really something strange.
 
-Read more about it [here](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher#Kasiski_examination)
+C:\>java -jar cipher.jar -ATBASH "Atbash is a pretty simple cipher."
 
-Another method of determining key length which furthermore can be used to determine what the key is later on using factors etc
+ZGYZHSRHZKIVGGBHRNKOVXRKSVI
 
-**Usage**
+C:\>java -jar cipher.jar -ATBASH "ZGYZHSRHZKIVGGBHRNKOVXRKSVI"
 
-````Java
-String knownKey = "KEY";
-		VigenereEncrypter vigenereEncrypter = new VigenereEncrypter();						
-		String cipherText = vigenereEncrypter.encryptText(knownKey, "FROMVIGENERECIPHERANALYSISITISGENERALLYGOODTOHAVEALARGEMESSAGETOANALYZE");		
+ATBASHISAPRETTYSIMPLECIPHER
 
-System.out.println(cipherText + "\n");
+C:\>java -jar cipher.jar -CAESAR 13 "The quick brown fox jumps over the lazy dog."
 
-Kasiski ki = new Kasiski();
-List<LinkedHashMap<String,ArrayList<Integer>>> klf = ki.getKeyDifferences(cipherText,2,5);
+GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT
 
-for(LinkedHashMap<String,ArrayList<Integer>> lhm : klf){
+C:\>java -jar cipher.jar -CAESAR 13 "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT"
 
-	for(String pattern : lhm.keySet()){
-
-		if(lhm.get(pattern).size() > 1)
-		{
-			System.out.println(pattern + " " + lhm.get(pattern) + "\n");
-
-			for(int x : lhm.get(pattern)){
-
-				System.out.println("[" + x + "] Factors: " + ki.getFactorsOfNumber(x));
-			}	
-
-			System.out.println();
-		}
-	}
-}
-````
-
-**Output**
-````
-PVMWZGQILOVCMMNRIPKRYVCQSWGDMQQILOVYVPWQSMNXMRETOEJKVEOQCCWYQIRYELKPWJI
-
-QI [24, 30]
-
-[24] Factors: [3, 6, 12, 24]
-[30] Factors: [5, 15, 30]  
-
-````
-From examing the factors above, we can assume the factor of 3 is the most common and possibly the key length. (The key word was in fact "KEY").
-
-
-# Rot13 Cipher - RotCipher.java
-
-[Rot13 Cipher Explained](https://en.wikipedia.org/wiki/ROT13) a very simple cipher.
-
-**Encrypting & Decrypting**
-
-````Java
-RotCipher rot13 = new RotCipher();
-String plainText = "Why did the chicken cross the road?";
-
-String encrypted = rot13.encrypt(plainText);
-System.out.println(encrypted);
-
-// Reverse the encryption by simply passing it back through the encryption method again
-
-encrypted = rot13.encrypt(encrypted);
-System.out.println(encrypted);
-
-````
-**Output**
-````
-Jul qvq gur puvpxra pebff gur ebnq?
-Why did the chicken cross the road?   
-````
+THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+```
