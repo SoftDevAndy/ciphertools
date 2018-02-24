@@ -71,4 +71,8 @@ C:\>java -jar cipher.jar -FRIEDKEY "RFGQGQKWNFPYQCRFYRUGJJECRCLAMBCB"
 
 Friedman IOC:     0.048387095
 Friedman Keysize: 2.4756446
+
+C:\>java -jar cipher.jar -POLY JUICE
+
+2445241315
 ```
