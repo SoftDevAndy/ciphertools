@@ -18,6 +18,7 @@ public class Runner {
 				System.out.println("-FRIEDKEY ciphertext");
 				System.out.println("-IOC ciphertext");
 				System.out.println("-FACTORS 15");
+				System.out.println("-POLY plaintext");
 				System.out.println("----------------------------------");
 			}
 		}
@@ -32,6 +33,7 @@ public class Runner {
 		int base64EncodePos = -1;
 		int base64DecodePos = -1;
 		int atbashPos = -1;
+		int polyPos = -1;
 				
 		if(args.length != 0){
 			
@@ -65,6 +67,9 @@ public class Runner {
 				
 				if(arg.toUpperCase().equals("-ATBASH"))
 					atbashPos = count + 1;
+				
+				if(arg.toUpperCase().equals("-POLY"))
+					polyPos = count + 1;
 				
 				if(iocPos == count){							
 					Friedman f = new Friedman();	
@@ -159,9 +164,20 @@ public class Runner {
 				if(atbashPos == count){				
 					
 					if(count + 1 <= args.length){
+						  
+						String result = new String(AtBash.encrypt(arg));    
 						
-						AtBash atbash = new AtBash();  
-						String result = new String(atbash.encrypt(arg));    
+						System.out.println();
+						System.out.println(result);
+					}
+				}
+				
+				if(polyPos == count){				
+					
+					if(count + 1 <= args.length){
+						Polybius p = new Polybius();
+						
+						String result = p.encrypt(arg);
 						
 						System.out.println();
 						System.out.println(result);
