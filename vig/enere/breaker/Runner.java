@@ -19,6 +19,7 @@ public class Runner {
 				System.out.println("-IOC ciphertext");
 				System.out.println("-FACTORS 15");
 				System.out.println("-POLY plaintext");
+				System.out.println("-POLY plaintext startletter");
 				System.out.println("----------------------------------");
 			}
 		}
@@ -174,10 +175,21 @@ public class Runner {
 				
 				if(polyPos == count){				
 					
+					String result;
+					
 					if(count + 1 <= args.length){
 						Polybius p = new Polybius();
 						
-						String result = p.encrypt(arg);
+						if(args.length == 3){
+							Character z = Character.toUpperCase(args[2].charAt(0));
+							
+							if(Character.isLetter(z) && z != 'Z')
+								result = p.encrypt(arg, z);
+							else									
+								result = p.encrypt(arg);
+						}
+						else							
+							result = p.encrypt(arg);
 						
 						System.out.println();
 						System.out.println(result);

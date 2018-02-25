@@ -11,7 +11,26 @@ public class Polybius {
 
 	public String encrypt(String plainText){
 		
+		List<StringBuilder> polySquare = buildPolySquare('I');		
+		StringBuilder cipher = polyEncrypt(polySquare, plainText);
+		
+		return cipher.toString(); 
+	}
+	
+	public String encrypt(String plainText, Character letter){
+		
+		List<StringBuilder> polySquare = buildPolySquare(letter);		
+		StringBuilder cipher = polyEncrypt(polySquare, plainText);
+		
+		return cipher.toString(); 
+	}
+
+	private List<StringBuilder> buildPolySquare(Character letter){
+		
 		List<StringBuilder> polySquare = new ArrayList<StringBuilder>();
+		
+		if(letter != letterPosition)
+			letterPosition = letter;
 		
 		for(int i = 0; i < defaultSize; i++)
 			polySquare.add(new StringBuilder());
@@ -39,7 +58,12 @@ public class Polybius {
 				++count;
 			}
 		}
-				
+		
+		return polySquare;
+	}
+	
+	private StringBuilder polyEncrypt(List<StringBuilder> polySquare, String plainText){
+		
 		StringBuilder cipher = new StringBuilder();
 		
 		for(Character c : plainText.toUpperCase().toCharArray()){
@@ -79,7 +103,7 @@ public class Polybius {
 			}
 		}
 		
-		return cipher.toString(); 
+		return cipher;
 	}
 	
 	private boolean withinRange(Character first, Character last, Character inQuestion){
