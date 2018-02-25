@@ -20,6 +20,7 @@ public class Runner {
 				System.out.println("-FACTORS 15");
 				System.out.println("-POLY plaintext");
 				System.out.println("-POLY plaintext startletter");
+				System.out.println("-CAESARNUM plaintext");
 				System.out.println("----------------------------------");
 			}
 		}
@@ -35,6 +36,7 @@ public class Runner {
 		int base64DecodePos = -1;
 		int atbashPos = -1;
 		int polyPos = -1;
+		int caesarNumPos = -1;
 				
 		if(args.length != 0){
 			
@@ -57,6 +59,9 @@ public class Runner {
 				if(arg.toUpperCase().equals("-CAESAR"))
 					rotPos = count + 1;
 				
+				if(arg.toUpperCase().equals("-CAESARNUM"))
+					caesarNumPos = count + 1;
+				
 				if(arg.toUpperCase().equals("-FACTORS"))
 					factorsPos = count + 1;
 				
@@ -74,8 +79,8 @@ public class Runner {
 				
 				if(iocPos == count){							
 					Friedman f = new Friedman();	
-					System.out.println();
-					System.out.println("Index of coincidence: " + f.getIndexOfCoincidence(arg) + "\n");
+					
+					System.out.println("\nIndex of coincidence: " + f.getIndexOfCoincidence(arg) + "\n");
 					System.out.println("Close to 0.070         = Possible Monoalphabetic or Subsitution Cipher.");					
 					System.out.println("Close to 0.045 to 0.05 = Possible Vigenere Cipher.");
 					System.out.println("Close to 0.0385        = Possible Polyalphabetic Cipher.");
@@ -86,8 +91,7 @@ public class Runner {
 					Friedman f = new Friedman();	
 					float indexOfCoincidence = f.getIndexOfCoincidence(arg);
 					
-					System.out.println();
-					System.out.println("Friedman IOC:     " + indexOfCoincidence);
+					System.out.println("\nFriedman IOC:     " + indexOfCoincidence);
 					System.out.println("Friedman Keysize: " + f.getKeysizeUsingFriedman(indexOfCoincidence, arg));
 				}	
 				
@@ -99,8 +103,7 @@ public class Runner {
 						
 						String result =  c.encrypt(Integer.parseInt(arg), args[count + 1]);
 						
-						System.out.println();
-						System.out.println(result);
+						System.out.println("\n" + result);
 					}
 				}
 				
@@ -111,8 +114,7 @@ public class Runner {
 						
 						String result = v.encryptText(arg, args[count + 1]);
 						
-						System.out.println();
-						System.out.println(result);
+						System.out.println("\n" + result);
 					}
 				}
 				
@@ -122,8 +124,7 @@ public class Runner {
 						VigenereEncrypter v = new VigenereEncrypter();
 						String result = v.decryptText(arg, args[count + 1]);
 						
-						System.out.println();
-						System.out.println(result);						
+						System.out.println("\n" + result);					
 					}					
 				}
 				
@@ -133,8 +134,7 @@ public class Runner {
 						Kasiski k = new Kasiski();
 						String result = k.getFactorsOfNumber(Integer.parseInt(arg));
 						
-						System.out.println();
-						System.out.println(result);						
+						System.out.println("\n" + result);						
 					}					
 				}
 				
@@ -145,8 +145,7 @@ public class Runner {
 						Base64.Encoder encoder = Base64.getEncoder();
 						String result = encoder.encodeToString(arg.getBytes());  
 						
-						System.out.println();
-						System.out.println(result);
+						System.out.println("\n" + result);
 					}
 				}
 				
@@ -157,8 +156,7 @@ public class Runner {
 						Base64.Decoder decoder = Base64.getDecoder();  
 						String result = new String(decoder.decode(arg));    
 						
-						System.out.println();
-						System.out.println(result);
+						System.out.println("\n" + result);
 					}
 				}
 				
@@ -168,8 +166,7 @@ public class Runner {
 						  
 						String result = new String(AtBash.encrypt(arg));    
 						
-						System.out.println();
-						System.out.println(result);
+						System.out.println("\n" + result);
 					}
 				}
 				
@@ -191,8 +188,19 @@ public class Runner {
 						else							
 							result = p.encrypt(arg);
 						
-						System.out.println();
-						System.out.println(result);
+						System.out.println("\n" + result);
+					}
+				}
+				
+				if(caesarNumPos == count){			
+					
+					CaesarNum  c = new CaesarNum();	
+					
+					if(count + 1 <= args.length){
+						
+						String result =  c.encrypt(arg);
+						
+						System.out.println("\n" + result);
 					}
 				}
 			}			

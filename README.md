@@ -51,6 +51,10 @@ C:\>java -jar cipher.jar -CAESAR 13 "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT
 
 THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
 
+C:\>java -jar cipher.jar -CAESARNUM "The quick brown fox jumps over the lazy dog."
+
+20,8,5,17,21,9,3,11,2,18,15,23,14,6,15,24,10,21,13,16,19,15,22,5,18,20,8,5,12,1,26,25,4,15,7
+
 C:\>java -jar cipher.jar -IOC "RFGQGQKWNFPYQCRFYRUGJJECRCLAMBCB"
 
 Index of coincidence: 0.048387095
