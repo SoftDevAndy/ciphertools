@@ -75,4 +75,9 @@ Friedman Keysize: 2.4756446
 C:\>java -jar cipher.jar -POLY JUICE
 
 2445241315
+
+C:\>java -jar cipher.jar -POLY "THE QUICK BROWN FOX AB" A
+
+442214414523122511423452331534531111 // <- Notice instead of using I & J as the same value it's now shifted to A & B
+
 ```
