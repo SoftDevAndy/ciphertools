@@ -15,6 +15,7 @@ public class Runner {
 				System.out.println("-DECODEVIGENERE key ciphertext");
 				System.out.println("-ATBASH cipherorplaintext");
 				System.out.println("-CAESAR 13 plaintext");
+				System.out.println("-CAESARNUM plaintext");
 				System.out.println("-FRIEDKEY ciphertext");
 				System.out.println("-IOC ciphertext");
 				System.out.println("-FACTORS 15");
