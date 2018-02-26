@@ -14,6 +14,7 @@ C:\>java -jar cipher.jar -help
 -DECODEVIGENERE key ciphertext
 -ATBASH cipherorplaintext
 -CAESAR 13 plaintext
+-CAESARNUM plaintext
 -FRIEDKEY ciphertext
 -IOC ciphertext
 -FACTORS 15
