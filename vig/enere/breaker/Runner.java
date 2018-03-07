@@ -21,6 +21,7 @@ public class Runner {
 				System.out.println("-FACTORS 15");
 				System.out.println("-POLY plaintext");
 				System.out.println("-POLY plaintext startletter");
+				System.out.println("-FREQ plaintext");
 				System.out.println("-CAESARNUM plaintext");
 				System.out.println("----------------------------------");
 			}
@@ -38,6 +39,7 @@ public class Runner {
 		int atbashPos = -1;
 		int polyPos = -1;
 		int caesarNumPos = -1;
+		int freqPos = -1;
 				
 		if(args.length != 0){
 			
@@ -77,6 +79,9 @@ public class Runner {
 				
 				if(arg.toUpperCase().equals("-POLY"))
 					polyPos = count + 1;
+				
+				if(arg.toUpperCase().equals("-FREQ"))
+					freqPos = count + 1;
 				
 				if(iocPos == count){							
 					Friedman f = new Friedman();	
@@ -200,6 +205,18 @@ public class Runner {
 					if(count + 1 <= args.length){
 						
 						String result =  c.encrypt(arg);
+						
+						System.out.println("\n" + result);
+					}
+				}
+				
+				if(freqPos == count){			
+					
+					Tools t = new Tools();	
+					
+					if(freqPos + 1 <= args.length){
+						
+						String result =  t.alphabetFrequency(arg);
 						
 						System.out.println("\n" + result);
 					}

@@ -20,6 +20,7 @@ C:\>java -jar cipher.jar -help
 -FACTORS 15
 -POLY plaintext
 -POLY plaintext startletter
+-FREQ plaintext
 -CAESARNUM plaintext
 ----------------------------------
 
@@ -87,5 +88,9 @@ C:\>java -jar cipher.jar -POLY JUICE
 C:\>java -jar cipher.jar -POLY "THE QUICK BROWN FOX AB" A
 
 442214414523122511423452331534531111 // <- Notice instead of using I & J as the same value it's now shifted to A & B
+
+C:\>java -jar cipher.jar -FREQ "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
+
+{A=1, B=1, C=1, D=1, E=3, F=1, G=1, H=2, I=1, J=1, K=1, L=1, M=1, N=1, O=4, P=1, Q=1, R=2, S=1, T=2, U=2, V=1, W=1, X=1, Y=1, Z=1}
 
 ```
