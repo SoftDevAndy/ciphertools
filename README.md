@@ -18,6 +18,9 @@ C:\>java -jar cipher.jar -help
 -FRIEDKEY ciphertext
 -IOC ciphertext
 -FACTORS 15
+-POLY plaintext
+-POLY plaintext startletter
+-CAESARNUM plaintext
 ----------------------------------
 
 C:\>java -jar cipher.jar -encodevigenere key "This is my phrase that will get encoded."
