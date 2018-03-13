@@ -2,6 +2,13 @@ package softdevandy.cipher.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* <h1>Vigenere Cipher</h1>
+* Simple Java implementation of the Vigenere Cipher.
+* @author SoftDevAndy on GitHub
+* @version 1.0
+*/
+
 public class VigenereEncrypter {
 	
 	private final int ALPHABETSIZE = 26;	
@@ -10,14 +17,22 @@ public class VigenereEncrypter {
 	
 	private List<String> vigenereSquare;
 	
-	public String decryptText(String keyword, String cipherText){
+	/**
+	 * Decrypts ciphertext using the Vigenere Cipher
+	 * More info on Vigenere Cipher here @see <a href="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher">Wikipedia Link</a>
+	 * 
+	 *  @param keyword Required when encrypting.
+	 *  @param ciphertext String Encrypted ciphertext.
+	 *  @return Returned Unencrypted String using the Vigenere Cipher.
+	 */
+	public String decryptText(String keyword, String ciphertext){
 		
 		StringBuffer encodedText = new StringBuffer();
-		StringBuffer codexStr = buildCodexString(keyword, cipherText);
+		StringBuffer codexStr = buildCodexString(keyword, ciphertext);
 		
 		int i = 0;
 		
-		for(Character a : cipherText.toCharArray()){
+		for(Character a : ciphertext.toCharArray()){
 			
 			Character r;
 			Character b = codexStr.charAt(i);
@@ -40,14 +55,22 @@ public class VigenereEncrypter {
 		return encodedText.toString();
 	}
 	
-	public String encryptText(String keyword, String cipherText){
+	/**
+	 * Encrypts plaintext using the Vigenere Cipher
+	 * More info on Vigenere Cipher here @see <a href="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher">Wikipedia Link</a>
+	 * 
+	 *  @param keyword Required when encrypting.
+	 *  @param ciphertext String Encrypted ciphertext.
+	 *  @return Returned Encrypted String using the Vigenere Cipher.
+	 */
+	public String encryptText(String keyword, String ciphertext){
 		
 		StringBuffer encodedText = new StringBuffer();		
-		StringBuffer codexStr = buildCodexString(keyword, cipherText);
+		StringBuffer codexStr = buildCodexString(keyword, ciphertext);
 		
 		int i = 0;
 		
-		for(Character a : cipherText.toUpperCase().toCharArray()){
+		for(Character a : ciphertext.toUpperCase().toCharArray()){
 			
 			if(Character.isLetter(a)){
 			
@@ -151,4 +174,14 @@ public class VigenereEncrypter {
 			i++;
 	    }
 	}
+
+	/* Singleton */
+	
+	private static VigenereEncrypter instance = null;
+	private VigenereEncrypter(){}
+	public static VigenereEncrypter getInstance(){
+		if(instance == null)
+			instance = new VigenereEncrypter();
+		return instance;
+	}	
 }

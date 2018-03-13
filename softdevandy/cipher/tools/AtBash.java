@@ -2,8 +2,23 @@ package softdevandy.cipher.tools;
 
 import java.util.HashMap;
 
+/**
+* <h1>AtBash Cipher</h1>
+* Simple Java implementation of the AtBash Cipher.
+* @author SoftDevAndy on GitHub
+* @version 1.0
+*/
+
 public class AtBash {
 	
+	/**
+	 * Encrypts plaintext to AtBash	 
+	 * e.g Hello encrypts to "Svool"
+	 * More info on AtBash here @see <a href="https://en.wikipedia.org/wiki/Atbash">Wikipedia Link</a>
+	 * 
+	 *  @param plaintext String you want to encrypt using the AtBash cipher.
+	 *  @return Returned Encrypted String using the AtBash cipher.
+	 */
 	public static String encrypt(String plaintext){
 		
 		HashMap<Character, Character> hm = new HashMap<Character, Character>();
@@ -31,4 +46,14 @@ public class AtBash {
 		
 		return sb.toString();
 	}
+	
+	/* Singleton */
+	
+	private static AtBash instance = null;
+	private AtBash(){}
+	public static AtBash getInstance(){
+		if(instance == null)
+			instance = new AtBash();
+		return instance;
+	}	
 }

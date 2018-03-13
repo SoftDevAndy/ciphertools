@@ -3,12 +3,25 @@ package softdevandy.cipher.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* <h1>Polybius Square Cipher</h1>
+* Polybius Square Cipher a commonly used cipher.
+* @author SoftDevAndy on GitHub
+* @version 1.0
+*/
 public class Polybius {
 	
 	private final int defaultSize = 5;
 	private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	private Character letterPosition = 'I';
 
+	/**
+	 * Returns a String encrypted using the Polybius square.
+	 * e.g "JUICE" gives an "2445241315"
+	 * More info here @see <a href="https://en.wikipedia.org/wiki/Polybius_square">Wikipedia Link</a>
+	 *  @param plaintext String that will get encrypted with the default Polybius cipher.
+	 *  @return Returns the encrypted text.
+	 */	
 	public String encrypt(String plaintext){
 		
 		List<StringBuilder> polySquare = buildPolySquare('I');		
@@ -17,6 +30,14 @@ public class Polybius {
 		return cipher.toString(); 
 	}
 	
+	/**
+	 * Returns a String encrypted using the Polybius square.
+	 * e.g "JUICE" gives an "2445241315"
+	 * More info here @see <a href="https://en.wikipedia.org/wiki/Polybius_square">Wikipedia Link</a>
+	 *  @param plaintext String that will get encrypted with the default Polybius cipher.
+	 *  @param letter Replaces the default letter pairing in the Polybius square. e.g instead of I and J it can be Q and R.
+	 *  @return Returns the encrypted text.
+	 */	
 	public String encrypt(String plaintext, Character letter){
 		
 		List<StringBuilder> polySquare = buildPolySquare(letter);		
@@ -113,4 +134,13 @@ public class Polybius {
 		return false;
 	}
 	
+	/* Singleton */
+	
+	private static Polybius instance = null;
+	private Polybius(){}
+	public static Polybius getInstance(){
+		if(instance == null)
+			instance = new Polybius();
+		return instance;
+	}
 }

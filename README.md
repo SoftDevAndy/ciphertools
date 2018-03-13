@@ -19,7 +19,6 @@ C:\>java -jar cipher.jar -help
 -CAESARNUM plaintext
 -FRIEDKEY ciphertext
 -IOC ciphertext
--FACTORS 15
 -POLY plaintext
 -POLY plaintext startletter
 -FREQ plaintext

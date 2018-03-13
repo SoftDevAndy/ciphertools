@@ -3,8 +3,23 @@ package softdevandy.cipher.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* <h1>Caesarian Cipher or ROT-n Cipher</h1>
+* Simple Java implementation of the ROT-n Cipher.
+* @author SoftDevAndy on GitHub
+* @version 1.0
+*/
 public class Caesarian {
 
+	/**
+	 * Encrypts plaintext using the ROT-n cipher. 
+	 * e.g Hello encrypts to "URYYB"
+	 * More info on AtBash here @see <a href="https://en.wikipedia.org/wiki/ROT13">Wikipedia Link</a>
+	 * 
+	 *  @param shift Number of shifts you which to shift the caesar alphabet by. e.g 13 for the standard Rot-13 Cipher.
+	 *  @param plaintext String you want to encrypt using the ROT-n cipher.
+	 *  @return Returned Encrypted String using the ROT-N cipher.
+	 */	
 	public String encrypt(int shift, String plaintext){
 				
 		List<Character> originalAlphabet = new ArrayList<Character>();
@@ -64,4 +79,13 @@ public class Caesarian {
 		return cipherText.toString();
 	}
 	
+	/* Singleton */
+	
+	private static Caesarian instance = null;
+	private Caesarian(){}
+	public static Caesarian getInstance(){
+		if(instance == null)
+			instance = new Caesarian();
+		return instance;
+	}	
 }

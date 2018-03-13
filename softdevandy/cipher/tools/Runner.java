@@ -2,6 +2,12 @@ package softdevandy.cipher.tools;
 
 import java.util.Base64;
 
+/**
+* <h1>Runner, Main Class</h1>
+* Main class, accepts the command line arguments.
+* @author SoftDevAndy on GitHub
+* @version 1.0
+*/
 public class Runner {
 
 	public static void main(String[] args) {
@@ -12,7 +18,6 @@ public class Runner {
 		int rotPos = -1;
 		int encryptPos = -1;
 		int uncencryptPos = -1;
-		int factorsPos = -1;
 		int base64EncodePos = -1;
 		int base64DecodePos = -1;
 		int atbashPos = -1;
@@ -44,9 +49,7 @@ public class Runner {
 				if(arg.toUpperCase().equals("-CAESAR"))
 					rotPos = count + 1;				
 				if(arg.toUpperCase().equals("-CAESARNUM"))
-					caesarNumPos = count + 1;				
-				if(arg.toUpperCase().equals("-FACTORS"))
-					factorsPos = count + 1;				
+					caesarNumPos = count + 1;			
 				if(arg.toUpperCase().equals("-ENCODEBASE64"))
 					base64EncodePos = count + 1;				
 				if(arg.toUpperCase().equals("-DECODEBASE64"))
@@ -63,65 +66,50 @@ public class Runner {
 					freqPos = count + 1;
 				
 				if(subcipherEncPos == count){					
-					if(count + 1 <= args.length){
-						SubCipher sc = new SubCipher();						
-						String result = sc.encrypt(arg, args[count + 1],true);						
+					if(count + 1 <= args.length){					
+						String result = SubCipher.getInstance().encrypt(arg, args[count + 1],true);						
 						System.out.println("\n" + result);
 					}
 				}
 				
 				if(subcipherDecPos == count){					
-					if(count + 1 <= args.length){
-						SubCipher sc = new SubCipher();						
-						String result = sc.encrypt(arg, args[count + 1],false);					
+					if(count + 1 <= args.length){					
+						String result = SubCipher.getInstance().encrypt(arg, args[count + 1],false);					
 						System.out.println("\n" + result);
 					}
 				}				
 				
-				if(iocPos == count){							
-					Friedman f = new Friedman();						
-					System.out.println("\nIndex of coincidence: " + f.getIndexOfCoincidence(arg) + "\n");
+				if(iocPos == count){										
+					System.out.println("\nIndex of coincidence: " + Friedman.getInstance().getIndexOfCoincidence(arg) + "\n");
 					System.out.println("Close to 0.070         = Possible Monoalphabetic or Subsitution Cipher.");					
 					System.out.println("Close to 0.045 to 0.05 = Possible Vigenere Cipher.");
 					System.out.println("Close to 0.0385        = Possible Polyalphabetic Cipher.");
 				}	
 				
-				if(friedKeySizePos == count){										
-					Friedman f = new Friedman();	
-					float indexOfCoincidence = f.getIndexOfCoincidence(arg);					
+				if(friedKeySizePos == count){			
+					float indexOfCoincidence = Friedman.getInstance().getIndexOfCoincidence(arg);					
 					System.out.println("\nFriedman IOC:     " + indexOfCoincidence);
-					System.out.println("Friedman Keysize: " + f.getKeysizeUsingFriedman(indexOfCoincidence, arg));
+					System.out.println("Friedman Keysize: " + Friedman.getInstance().getKeysizeUsingFriedman(arg));
 				}	
 				
 				if(rotPos == count){
 					if(count + 1 <= args.length){	
-						Caesarian  c = new Caesarian();
-						String result =  c.encrypt(Integer.parseInt(arg), args[count + 1]);						
+						String result =  Caesarian.getInstance().encrypt(Integer.parseInt(arg), args[count + 1]);						
 						System.out.println("\n" + result);
 					}
 				}
 				
 				if(encryptPos == count){						
-					if(count + 1 <= args.length){
-						VigenereEncrypter v = new VigenereEncrypter();						
-						String result = v.encryptText(arg, args[count + 1]);						
+					if(count + 1 <= args.length){					
+						String result = VigenereEncrypter.getInstance().encryptText(arg, args[count + 1]);						
 						System.out.println("\n" + result);
 					}
 				}
 				
 				if(uncencryptPos == count){							
 					if(count + 1 <= args.length){
-						VigenereEncrypter v = new VigenereEncrypter();
-						String result = v.decryptText(arg, args[count + 1]);						
+						String result = VigenereEncrypter.getInstance().decryptText(arg, args[count + 1]);						
 						System.out.println("\n" + result);					
-					}					
-				}
-				
-				if(factorsPos == count){						
-					if(count + 1 <= args.length){
-						Kasiski k = new Kasiski();
-						String result = k.getFactorsOfNumber(Integer.parseInt(arg));						
-						System.out.println("\n" + result);						
 					}					
 				}
 				
@@ -153,18 +141,17 @@ public class Runner {
 					String result;
 					
 					if(count + 1 <= args.length){
-						Polybius p = new Polybius();
 						
 						if(args.length == 3){
 							Character z = Character.toUpperCase(args[2].charAt(0));
 							
 							if(Character.isLetter(z) && z != 'Z')
-								result = p.encrypt(arg, z);
+								result = Polybius.getInstance().encrypt(arg, z);
 							else									
-								result = p.encrypt(arg);
+								result = Polybius.getInstance().encrypt(arg);
 						}
 						else							
-							result = p.encrypt(arg);
+							result = Polybius.getInstance().encrypt(arg);
 						
 						System.out.println("\n" + result);
 					}
@@ -172,8 +159,7 @@ public class Runner {
 				
 				if(caesarNumPos == count){		
 					if(count + 1 <= args.length){
-						CaesarNum  c = new CaesarNum();	
-						String result =  c.encrypt(arg);						
+						String result =  CaesarNum.getInstance().encrypt(arg);						
 						System.out.println("\n" + result);
 					}
 				}
