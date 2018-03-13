@@ -1,18 +1,19 @@
-package vig.enere.breaker;
+package softdevandy.cipher.tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Caesarian {
 
-	public String encrypt(int shift, String plainText){
+	public String encrypt(int shift, String plaintext){
 				
-		List<Character> original = new ArrayList<Character>();
-		List<Character> caesar = new ArrayList<Character>();
+		List<Character> originalAlphabet = new ArrayList<Character>();
+		List<Character> caesarAlphabet = new ArrayList<Character>();
 						
-		for(int i = 1; i < 27; i++){			
-			original.add((char)(64 + i));
-		}		
+		for(int i = 1; i < 27; i++)			
+			originalAlphabet.add((char)(64 + i));
+		
+		// Creating an alphabet character list A->Z
 		
 		int startPosition;		
 		int count = 0;
@@ -24,35 +25,41 @@ public class Caesarian {
 				
 		int positionMarker = startPosition;
 		
+		// Takes a position to start the shifted alphabet at
+		
 		while(count < 26){
 			
 			if(positionMarker > 90)
 				positionMarker = 65;
 			
-			caesar.add((char)(positionMarker));
+			caesarAlphabet.add((char)(positionMarker));
 						
 			++positionMarker;
 			++count;
 		}
+		
+		// Builds the shifted alphabet
 						
 		StringBuffer cipherText = new StringBuffer();
 		
-		for(Character c : plainText.toCharArray()){
+		for(Character c : plaintext.toCharArray()){
 								
 			if(Character.isAlphabetic(c)){
 			
 				int pos = Character.toUpperCase(c) - 64;
 								
 				if(pos < 26 && pos >= 0)
-					cipherText.append(caesar.get(pos));
+					cipherText.append(caesarAlphabet.get(pos));
 				else if(pos == 26)
-					cipherText.append(caesar.get(0));
+					cipherText.append(caesarAlphabet.get(0));
 				else
 					cipherText.append(" ");
 			}
 			else
 				cipherText.append(" ");
 		}
+		
+		// Foreach letter of the alphabet, find the matching letter in the shifted alphabet and append it.
 		
 		return cipherText.toString();
 	}

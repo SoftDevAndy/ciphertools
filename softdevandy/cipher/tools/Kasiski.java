@@ -1,4 +1,4 @@
-package vig.enere.breaker;
+package softdevandy.cipher.tools;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,8 +13,7 @@ public class Kasiski {
         	
         	while(factorMe % i == 0)
         	{            	
-            	hs.add(factorMe);
-            	
+            	hs.add(factorMe);            	
             	factorMe = factorMe / i;
             }            
         }

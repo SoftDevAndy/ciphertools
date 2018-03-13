@@ -1,4 +1,4 @@
-package vig.enere.breaker;
+package softdevandy.cipher.tools;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,10 +55,8 @@ public class VigenereEncrypter {
 				int x = (int)(b - MINASCII);
 				int y = (int)(a - MINASCII);
 				
-				Character encodedChar = getVigenereSquareChar(x,y);
-				
-				encodedText.append(encodedChar);
-				
+				Character encodedChar = getVigenereSquareChar(x,y);				
+				encodedText.append(encodedChar);				
 				i++;
 			}
 			

@@ -1,4 +1,4 @@
-package vig.enere.breaker;
+package softdevandy.cipher.tools;
 
 import java.util.LinkedHashMap;
 
@@ -10,9 +10,9 @@ public class Friedman {
 	private float MIN = 0.038f;
 	private float MAX = 0.065f;
 	
-	public float getIndexOfCoincidence(String cipherText){
+	public float getIndexOfCoincidence(String ciphertext){
 		
-		alphabetFrequencyTable = buildAlphabetFrequencyTable(cipherText);
+		alphabetFrequencyTable = buildAlphabetFrequencyTable(ciphertext);
 		
 		float nTotal = valueCount(alphabetFrequencyTable);
 		float otherTotal = otherValueCount(alphabetFrequencyTable);		
@@ -20,9 +20,9 @@ public class Friedman {
 		return otherTotal / (nTotal * (nTotal - 1));	
 	}
 	
-	public float getKeysizeUsingFriedman(float indexOfCoincidence, String cipherText){
+	public float getKeysizeUsingFriedman(float indexOfCoincidence, String ciphertext){
 		
-		alphabetFrequencyTable = buildAlphabetFrequencyTable(cipherText);
+		alphabetFrequencyTable = buildAlphabetFrequencyTable(ciphertext);
 		
 		float nTotal = valueCount(alphabetFrequencyTable);		
 		float a = 0.027f * nTotal;
@@ -31,7 +31,7 @@ public class Friedman {
 		return a / b;
 	}
 	
-	private LinkedHashMap<Character, Integer> buildAlphabetFrequencyTable(String cipherText){
+	private LinkedHashMap<Character, Integer> buildAlphabetFrequencyTable(String ciphertext){
 
 		LinkedHashMap<Character, Integer> alphabetFrequency = new LinkedHashMap<Character, Integer>();
 		
@@ -40,7 +40,7 @@ public class Friedman {
 			alphabetFrequency.put(letter, 0);
 		}
 		
-		for(Character c : cipherText.toCharArray()){
+		for(Character c : ciphertext.toCharArray()){
 					
 			c = Character.toUpperCase(c);
 			
@@ -57,9 +57,8 @@ public class Friedman {
 		
 		int total = 0;
 		
-		for(int x : frequencyTable.values()){
+		for(int x : frequencyTable.values())
 			total += x;
-		}
 		
 		return total;
 	}
@@ -70,9 +69,8 @@ public class Friedman {
 		
 		for(int x : frequencyTable.values()){
 			
-			if(x != 0){
+			if(x != 0)
 				total += (x * (x - 1));
-			}
 		}
 		
 		return total;

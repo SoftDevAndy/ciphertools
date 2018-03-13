@@ -1,14 +1,14 @@
-package vig.enere.breaker;
+package softdevandy.cipher.tools;
 
 public class CaesarNum {
 	
-	public String encrypt(String plainText){
+	public String encrypt(String plaintext){
 		
 		StringBuilder ciphertext = new StringBuilder();
 		
 		int pos = 1;
 		
-		for(Character c : plainText.toUpperCase().toCharArray()){			
+		for(Character c : plaintext.toUpperCase().toCharArray()){			
 			
 			pos++;
 			
@@ -16,10 +16,12 @@ public class CaesarNum {
 				
 				ciphertext.append(((int)c - 64));
 				
-				if(pos < plainText.length())
+				if(pos < plaintext.length())
 					 ciphertext.append(",");			
 			}
 		}
+		
+		// Foreach letter in plaintext, find the alphanumeric version. e.g A = 1
 		
 		return ciphertext.toString();
 	}

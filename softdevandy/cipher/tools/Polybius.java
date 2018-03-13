@@ -1,4 +1,4 @@
-package vig.enere.breaker;
+package softdevandy.cipher.tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,18 +9,18 @@ public class Polybius {
 	private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	private Character letterPosition = 'I';
 
-	public String encrypt(String plainText){
+	public String encrypt(String plaintext){
 		
 		List<StringBuilder> polySquare = buildPolySquare('I');		
-		StringBuilder cipher = polyEncrypt(polySquare, plainText);
+		StringBuilder cipher = polyEncrypt(polySquare, plaintext);
 		
 		return cipher.toString(); 
 	}
 	
-	public String encrypt(String plainText, Character letter){
+	public String encrypt(String plaintext, Character letter){
 		
 		List<StringBuilder> polySquare = buildPolySquare(letter);		
-		StringBuilder cipher = polyEncrypt(polySquare, plainText);
+		StringBuilder cipher = polyEncrypt(polySquare, plaintext);
 		
 		return cipher.toString(); 
 	}
@@ -62,11 +62,11 @@ public class Polybius {
 		return polySquare;
 	}
 	
-	private StringBuilder polyEncrypt(List<StringBuilder> polySquare, String plainText){
+	private StringBuilder polyEncrypt(List<StringBuilder> polySquare, String plaintext){
 		
 		StringBuilder cipher = new StringBuilder();
 		
-		for(Character c : plainText.toUpperCase().toCharArray()){
+		for(Character c : plaintext.toUpperCase().toCharArray()){
 			
 			if(Character.isLetter(c)){
 				
@@ -96,8 +96,7 @@ public class Polybius {
 						if(col != -1 && row != -1)
 							cipher.append(row + "" + col);
 						else
-							cipher.append(" ");
-					
+							cipher.append(" ");					
 					}
 				}
 			}
