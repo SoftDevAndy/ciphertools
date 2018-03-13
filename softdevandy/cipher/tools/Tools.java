@@ -2,8 +2,19 @@ package softdevandy.cipher.tools;
 
 import java.util.HashMap;
 
+/**
+* <h1>Tools</h1>
+* A class for handy tools that may help with ciphers.
+* @author SoftDevAndy on GitHub
+* @version 1.0
+*/
 public class Tools {
 		
+	/**
+	 * Returns a frequency table of letters in with given plaintext.
+	 *  @param plaintext String for plaintext or ciphertext. 
+	 *  @return Returns a frequency table.
+	 */	
 	public String alphabetFrequency(String plaintext){
 		
 		HashMap<Character, Integer> hm = new HashMap<Character, Integer>(); 
