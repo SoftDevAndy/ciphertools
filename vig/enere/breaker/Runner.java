@@ -13,6 +13,8 @@ public class Runner {
 				System.out.println("-DECODEBASE64 ciphertext");
 				System.out.println("-ENCODEVIGENERE key plaintext");
 				System.out.println("-DECODEVIGENERE key ciphertext");
+				System.out.println("-SUBENCODE mixedalpha plaintext");
+				System.out.println("-SUBDECODE mixedalpha plaintext");
 				System.out.println("-ATBASH cipherorplaintext");
 				System.out.println("-CAESAR 13 plaintext");
 				System.out.println("-CAESARNUM plaintext");
@@ -40,6 +42,8 @@ public class Runner {
 		int polyPos = -1;
 		int caesarNumPos = -1;
 		int freqPos = -1;
+		int subcipherEncPos = -1;
+		int subcipherDecPos = -1;
 				
 		if(args.length != 0){
 			
@@ -74,6 +78,12 @@ public class Runner {
 				if(arg.toUpperCase().equals("-DECODEBASE64"))
 					base64DecodePos = count + 1;
 				
+				if(arg.toUpperCase().equals("-SUBENCODE"))
+					subcipherEncPos = count + 1;
+				
+				if(arg.toUpperCase().equals("-SUBDECODE"))
+					subcipherDecPos = count + 1;
+				
 				if(arg.toUpperCase().equals("-ATBASH"))
 					atbashPos = count + 1;
 				
@@ -82,6 +92,24 @@ public class Runner {
 				
 				if(arg.toUpperCase().equals("-FREQ"))
 					freqPos = count + 1;
+				
+				if(subcipherEncPos == count){
+					
+					if(count + 1 <= args.length){
+						SubCipher sc = new SubCipher();						
+						String result = sc.encrypt(arg, args[count + 1],true);						
+						System.out.println("\n" + result);
+					}
+				}
+				
+				if(subcipherDecPos == count){
+					
+					if(count + 1 <= args.length){
+						SubCipher sc = new SubCipher();						
+						String result = sc.encrypt(arg, args[count + 1],false);					
+						System.out.println("\n" + result);
+					}
+				}				
 				
 				if(iocPos == count){							
 					Friedman f = new Friedman();	

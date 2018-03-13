@@ -12,6 +12,8 @@ C:\>java -jar cipher.jar -help
 -DECODEBASE64 ciphertext
 -ENCODEVIGENERE key plaintext
 -DECODEVIGENERE key ciphertext
+-SUBENCODE mixedalpha plaintext
+-SUBDECODE mixedalpha plaintext
 -ATBASH cipherorplaintext
 -CAESAR 13 plaintext
 -CAESARNUM plaintext
@@ -73,6 +75,17 @@ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
 C:\>java -jar cipher.jar -CAESARNUM "The quick brown fox jumps over the lazy dog."
 
 20,8,5,17,21,9,3,11,2,18,15,23,14,6,15,24,10,21,13,16,19,15,22,5,18,20,8,5,12,1,26,25,4,15,7
+```
+
+## Subsitution Cipher
+
+```
+C:\>java -jar cipher.jar -SUBENCODE "BHAJWKMYFVSXRNPZEQLUGIDCOT" "The quick brown fox jumps over the lazy dog."
+
+UYW EGFAS HQPDN KPC VGRZL PIWQ UYW XBTO JPM
+
+C:\>java -jar cipher.jar -SUBDECODE "BHAJWKMYFVSXRNPZEQLUGIDCOT" "UYW EGFAS HQPDN KPC VGRZL PIWQ UYW XBTO JPM"
+
 ```
 
 ## Polybius Encode/Decode
